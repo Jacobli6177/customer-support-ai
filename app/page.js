@@ -10,6 +10,7 @@ export default function Home() {
     const [userInput, setUserInput] = useState('');
     const [chat, setChat] = useState(null);
     const [theme, setTheme] = useState("light");
+    const [language, setLanguage] = useState("English");
     const [error, setError] = useState(null);
 
     const API_key = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
@@ -86,6 +87,10 @@ export default function Home() {
 
     const handleThemeChange = (e) => {
         setTheme(e.target.value);
+    };
+
+    const handleLanguageChange = (e) => {
+        setLanguage(e.target.value);
     };
 
     const getThemeColors = () => {
@@ -194,6 +199,21 @@ export default function Home() {
                     fullWidth
                     sx={{ mr: 1, bgcolor: secondary, color: text }}
                 />
+                <FormControl variant="outlined" size="small" sx={{ minWidth: 120, mr: 1 }}>
+                    <InputLabel id="language-select-label" sx={{ color: text }}>Language</InputLabel>
+                    <Select
+                        labelId="language-select-label"
+                        id="language-select"
+                        value={language}
+                        onChange={handleLanguageChange}
+                        label="Language"
+                        sx={{ bgcolor: secondary, color: text }}
+                    >
+                        <MenuItem value="English">English</MenuItem>
+                        <MenuItem value="Spanish">Spanish</MenuItem>
+                        <MenuItem value="Chinese">Chinese</MenuItem>
+                    </Select>
+                </FormControl>
                 <Button
                     variant="contained"
                     onClick={handleSendMessage}
